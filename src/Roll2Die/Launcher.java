@@ -1,10 +1,5 @@
 package Roll2Die;
-//import tankrotationexample.game.TRE;
-//import tankrotationexample.game.Tank;
-import Roll2Die.Menu.EndGamePanel;
-import Roll2Die.Menu.MonsterFightEnvironment;
-import Roll2Die.Menu.StartMenuPanel;
-import Roll2Die.Menu.TankControlsPanel;
+import Roll2Die.Menu.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +13,7 @@ public class Launcher {
      * to sub-panels depending on game state.
      */
     private JPanel mainPanel;
+
     /*
      * start panel will be used to view the start menu. It will contain
      * two buttons start and exit.
@@ -26,6 +22,20 @@ public class Launcher {
 
 
     private JPanel controlPanel;
+
+    private JPanel worldPanel;
+
+    private JPanel winPanel;
+
+    private JPanel creditPanel;
+
+    /*
+     * end panel is used to show the end game panel.  it will contain
+     * two buttons restart and exit.
+     */
+    private JPanel endPanel;
+
+
 
     /*
      * game panel is used to show our game to the screen. inside this panel
@@ -36,11 +46,7 @@ public class Launcher {
      * called the event dispatch thread.
      */
     private MonsterFightEnvironment gamePanel;
-    /*
-     * end panel is used to show the end game panel.  it will contain
-     * two buttons restart and exit.
-     */
-    private JPanel endPanel;
+
     /*
      * JFrame used to store our main panel. We will also attach all event
      * listeners to this JFrame.
@@ -63,18 +69,24 @@ public class Launcher {
         this.mainPanel = new JPanel(); // create a new main panel
 
         this.startPanel = new StartMenuPanel(this); // create a new start panel
-        this.controlPanel = new TankControlsPanel(this);
+        this.controlPanel = new PlayerControlsPanel(this);
+        this.worldPanel = new OverWorldPanel(this);
         this.gamePanel = new MonsterFightEnvironment(this); // create a new game panel
         this.gamePanel.fightInit(); // initialize game, but DO NOT start game
         this.endPanel = new EndGamePanel(this); // create a new end game pane;
+        this.winPanel = new WinnerPanel(this);
+        this.creditPanel = new CreditPanel(this);
 
         cl = new CardLayout(); // creating a new CardLayout Panel
         this.mainPanel.setLayout(cl); // set the layout of the main panel to our card layout
 
         this.mainPanel.add(startPanel, "start"); //add the start panel to the main panel
         this.mainPanel.add(controlPanel, "controls");
+        this.mainPanel.add(worldPanel, "world");
         this.mainPanel.add(gamePanel, "game");   //add the game panel to the main panel
         this.mainPanel.add(endPanel, "end");    // add the end game panel to the main panel
+        this.mainPanel.add(winPanel, "win");
+        this.mainPanel.add(creditPanel, "credit");
 
         this.jf.add(mainPanel); // add the main panel to the JFrame
         this.jf.setResizable(false); //make the JFrame not resizable
@@ -93,16 +105,29 @@ public class Launcher {
                 this.jf.setSize(GameConstants.CONTROLS_MENU_SCREEN_WIDTH,GameConstants.CONTROLS_MENU_SCREEN_HEIGHT);
                 break;
 
+            case "world":
+                this.jf.setSize(GameConstants.OVERWORLD_SCREEN_WIDTH, GameConstants.OVERWORLD_SCREEN_HEIGHT);
+                break;
+
             case "game":
                 // set the size of the jFrame to the expected size for the game panel
-                this.jf.setSize(GameConstants.GAME_PANEL_WIDTH,GameConstants.GAME_PANEL_HEIGHT);
+                this.jf.setSize(GameConstants.GAME_SCREEN_WIDTH,GameConstants.GAME_SCREEN_HEIGHT);
                 //start a new thread for the game to run. This will ensure our JFrame is responsive and
                 // not stuck executing the game loop.
                 (new Thread(this.gamePanel)).start();
                 break;
+
             case "end":
                 // set the size of the jFrame to the expected size for the end panel
                 this.jf.setSize(GameConstants.END_MENU_SCREEN_WIDTH,GameConstants.END_MENU_SCREEN_HEIGHT);
+                break;
+
+            case "win":
+                this.jf.setSize(GameConstants.WINNER_SCREEN_WIDTH,GameConstants.WINNER_SCREEN_HEIGHT);
+                break;
+
+            case "credit":
+                this.jf.setSize(GameConstants.CREDIT_SCREEN_WIDTH,GameConstants.CREDIT_SCREEN_HEIGHT);
                 break;
         }
         this.cl.show(mainPanel, type); // change current panel shown on main panel tp the panel denoted by type.

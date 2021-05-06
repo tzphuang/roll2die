@@ -1,12 +1,11 @@
 package Roll2Die.Menu;
 
 import Roll2Die.Launcher;
+import Roll2Die.Resource;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class EndGamePanel extends JPanel {
 
@@ -17,27 +16,22 @@ public class EndGamePanel extends JPanel {
 
     public EndGamePanel(Launcher lf) {
         this.lf = lf;
-        try {
-            menuBackground = ImageIO.read(this.getClass().getClassLoader().getResource("title.png"));
-        } catch (IOException e) {
-            System.out.println("Error cant read menu background");
-            e.printStackTrace();
-            System.exit(-3);
-        }
+
+        menuBackground = Resource.getResourceImg("endScreen");
         this.setBackground(Color.BLACK);
         this.setLayout(null);
 
-        start = new JButton("Restart Game");
+        start = new JButton("Main Menu");
         start.setFont(new Font("Courier New", Font.BOLD ,24));
-        start.setBounds(150,300,175,50);
+        start.setBounds(175,300,150,50);
         start.addActionListener((actionEvent -> {
-            this.lf.setFrame("game");
+            this.lf.setFrame("start");
         }));
 
 
         exit = new JButton("Exit");
         exit.setFont(new Font("Courier New", Font.BOLD ,24));
-        exit.setBounds(150,400,175,50);
+        exit.setBounds(175,350,150,50);
         exit.addActionListener((actionEvent -> {
             this.lf.closeGame();
         }));

@@ -1,7 +1,5 @@
 package Roll2Die;
 
-import Roll2Die.Menu.MonsterFightEnvironment;
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,7 +25,10 @@ public class Resource {
             Resource.resources.put("godMode", read(Objects.requireNonNull(TRE.class.getClassLoader().getResource("tankgold.png"))));
             Resource.resources.put("mgBulletImg",read(Objects.requireNonNull(TRE.class.getClassLoader().getResource("bullet.png"))));
             Resource.resources.put("rocketBulletImg",read(Objects.requireNonNull(TRE.class.getClassLoader().getResource("rocket.png"))));*/
-            Resource.resources.put("playerFightImg",read(Objects.requireNonNull(MonsterFightEnvironment.class.getClassLoader().getResource("rocket.png"))));
+
+            //Resource.resources.put("playerFightImg",read(Objects.requireNonNull(MonsterFightEnvironment.class.getClassLoader().getResource("rocket.png"))));
+            Resource.resources.put("titleScreen",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("roll2diedice.png"))));
+            Resource.resources.put("endScreen",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("Die2RollRip.png"))));
 
         }catch (IOException e){
             e.printStackTrace();

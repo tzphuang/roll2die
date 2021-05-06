@@ -83,14 +83,14 @@ public abstract class Moving extends GameObject{
         if (getX() < 30) {
             setX(30);
         }
-        if (getX() >= GameConstants.WORLD_WIDTH - 88) {
-            setX(GameConstants.WORLD_WIDTH - 88);
+        if (getX() >= GameConstants.OVERWORLD_SCREEN_WIDTH - 88) {
+            setX(GameConstants.OVERWORLD_SCREEN_WIDTH - 88);
         }
         if (getY() < 40) {
             setY(40);
         }
-        if (getY() >= GameConstants.WORLD_HEIGHT - 80) {
-            setY(GameConstants.WORLD_HEIGHT - 80);
+        if (getY() >= GameConstants.OVERWORLD_SCREEN_HEIGHT - 80) {
+            setY(GameConstants.OVERWORLD_SCREEN_HEIGHT - 80);
         }
     }
 
