@@ -1,9 +1,10 @@
 package Roll2Die;
 //import tankrotationexample.game.TRE;
 //import tankrotationexample.game.Tank;
-import Menu.EndGamePanel;
-import Menu.StartMenuPanel;
-import Menu.TankControlsPanel;
+import Roll2Die.Menu.EndGamePanel;
+import Roll2Die.Menu.MonsterFightEnvironment;
+import Roll2Die.Menu.StartMenuPanel;
+import Roll2Die.Menu.TankControlsPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +35,7 @@ public class Launcher {
      * run long running loops(or tasks) on Java Swing's main thread. This thread is
      * called the event dispatch thread.
      */
-    private TRE gamePanel;
+    private MonsterFightEnvironment gamePanel;
     /*
      * end panel is used to show the end game panel.  it will contain
      * two buttons restart and exit.
@@ -53,28 +54,28 @@ public class Launcher {
 
     public Launcher(){
         this.jf = new JFrame();             // creating a new JFrame object
-        this.jf.setTitle("Tank Wars Game"); // setting the title of the JFrame window.
+        this.jf.setTitle("Roll2Die"); // setting the title of the JFrame window.
         this.jf.setLocationRelativeTo(null); // this will open the window in the center of the screen.
         this.jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // when the GUI is closed, this will also shutdown the VM
     }
 
     private void initUIComponents(){
         this.mainPanel = new JPanel(); // create a new main panel
+
         this.startPanel = new StartMenuPanel(this); // create a new start panel
-
         this.controlPanel = new TankControlsPanel(this);
-
-        this.gamePanel = new TRE(this); // create a new game panel
-        this.gamePanel.gameInitialize(); // initialize game, but DO NOT start game
+        this.gamePanel = new MonsterFightEnvironment(this); // create a new game panel
+        this.gamePanel.fightInit(); // initialize game, but DO NOT start game
         this.endPanel = new EndGamePanel(this); // create a new end game pane;
+
         cl = new CardLayout(); // creating a new CardLayout Panel
         this.mainPanel.setLayout(cl); // set the layout of the main panel to our card layout
+
         this.mainPanel.add(startPanel, "start"); //add the start panel to the main panel
-
         this.mainPanel.add(controlPanel, "controls");
-
         this.mainPanel.add(gamePanel, "game");   //add the game panel to the main panel
         this.mainPanel.add(endPanel, "end");    // add the end game panel to the main panel
+
         this.jf.add(mainPanel); // add the main panel to the JFrame
         this.jf.setResizable(false); //make the JFrame not resizable
         this.setFrame("start"); // set the current panel to start panel
