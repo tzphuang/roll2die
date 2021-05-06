@@ -16,7 +16,7 @@ public class CreditPanel extends JPanel {
     public CreditPanel(Launcher lf) {
         this.lf = lf;
 
-        menuBackground = Resource.getResourceImg("endScreen");
+        menuBackground = Resource.getResourceImg("creditScreen");
         this.setBackground(Color.BLACK);
         this.setLayout(null);
 

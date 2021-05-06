@@ -16,7 +16,7 @@ public class WinnerPanel extends JPanel {
     public WinnerPanel(Launcher lf) {
         this.lf = lf;
 
-        menuBackground = Resource.getResourceImg("titleScreen");
+        menuBackground = Resource.getResourceImg("winnerScreen");
         this.setBackground(Color.BLACK);
         this.setLayout(null);
 

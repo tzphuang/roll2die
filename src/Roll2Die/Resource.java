@@ -29,6 +29,8 @@ public class Resource {
             //Resource.resources.put("playerFightImg",read(Objects.requireNonNull(MonsterFightEnvironment.class.getClassLoader().getResource("rocket.png"))));
             Resource.resources.put("titleScreen",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("roll2diedice.png"))));
             Resource.resources.put("endScreen",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("Die2RollRip.png"))));
+            Resource.resources.put("winnerScreen",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("winnerpic.png"))));
+            Resource.resources.put("creditScreen",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("creditsPic.png"))));
 
         }catch (IOException e){
             e.printStackTrace();
