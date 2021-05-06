@@ -26,7 +26,7 @@ public class OverWorldPanel extends JPanel {
         this.setBackground(Color.BLACK);
         this.setLayout(null);
 
-        monsterFightButton = new JButton("Go to Game");
+        monsterFightButton = new JButton(">>>Boss Fight");
         monsterFightButton.setFont(new Font("Courier New", Font.BOLD ,24));
         monsterFightButton.setBounds(575,375,250,50);
         monsterFightButton.addActionListener((actionEvent -> {
