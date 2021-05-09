@@ -74,6 +74,8 @@ public class PlayerCharacter extends Moving{
 
     }
 
+    //add in fireball image
+    /*
     public void spawnMagic(){
         Projectile currProjectile;
 
@@ -86,7 +88,7 @@ public class PlayerCharacter extends Moving{
                 System.out.println("spawnMagic went to default, something is wrong!");
                 break;
         }
-    }
+    }*/
 
     @Override
     public void collisionDetected(GameObject currentObjectCollided) {
