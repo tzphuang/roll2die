@@ -182,7 +182,7 @@ public class OverWorldPanel extends JPanel {
         //D20 = new JButton("D20");
         D20 = new JButton("");
         D20.setFont(new Font("Courier New", Font.BOLD ,24));
-        D20.setIcon(new ImageIcon(Resource.getResourceImg("fireball")));
+        D20.setIcon(new ImageIcon(Resource.getResourceImg("d20")));
         D20.setBounds(1300, 400, 100, 100);
         D20.addActionListener((actionEvent -> {
             //System.out.println("D20 button pressed");
@@ -191,8 +191,9 @@ public class OverWorldPanel extends JPanel {
         }));
 
         //creating button for 4 sided dice rolling mechanic
-        D4 = new JButton("D4");
+        D4 = new JButton("");
         D4.setFont(new Font("Courier New", Font.BOLD ,24));
+        D4.setIcon(new ImageIcon(Resource.getResourceImg("d4")));
         D4.setBounds(1300, 500, 100, 100);
         D4.addActionListener((actionEvent -> {
             //System.out.println("d4 button pressed");
@@ -201,8 +202,9 @@ public class OverWorldPanel extends JPanel {
         }));
 
         //creating button for 2x(six sided dice) rolling mechanic
-        twoD6 = new JButton("2D6");
+        twoD6 = new JButton("");
         twoD6.setFont(new Font("Courier New", Font.BOLD ,24));
+        twoD6.setIcon(new ImageIcon(Resource.getResourceImg("2d6")));
         twoD6.setBounds(1300, 600, 100, 100);
         twoD6.addActionListener((actionEvent -> {
             //System.out.println("twoD6 button pressed");

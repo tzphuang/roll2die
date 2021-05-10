@@ -35,6 +35,10 @@ public class Resource {
             Resource.resources.put("tile7",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("tile 7.png"))));
             Resource.resources.put("tile8",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("tile 8.png"))));
 
+            Resource.resources.put("2d6",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("2d6 icon.png"))));
+            Resource.resources.put("d4",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("d4 icon.png"))));
+            Resource.resources.put("d20",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("d20 icon.png"))));
+
             Resource.resources.put("fireball",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("fireball.png"))));
 
 
