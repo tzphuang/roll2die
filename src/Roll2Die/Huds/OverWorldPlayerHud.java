@@ -24,7 +24,7 @@ public class OverWorldPlayerHud extends GameHuds{
 
         g2dTopHud.setFont(new Font("Helvetica", Font.BOLD, 36));
 
-        g2dTopHud.setColor(Color.GRAY); //setting color for background of over world HUD
+        g2dTopHud.setColor(Color.BLACK); //setting color for background of over world HUD
         g2dTopHud.fillRect(0,0,1400,200);
 
         g2dTopHud.setColor(Color.YELLOW); //setting color for text

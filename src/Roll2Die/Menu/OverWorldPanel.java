@@ -179,8 +179,10 @@ public class OverWorldPanel extends JPanel {
         }));
 
         //creating button for 20 sided dice rolling mechanic
-        D20 = new JButton("D20");
+        //D20 = new JButton("D20");
+        D20 = new JButton("");
         D20.setFont(new Font("Courier New", Font.BOLD ,24));
+        D20.setIcon(new ImageIcon(Resource.getResourceImg("fireball")));
         D20.setBounds(1300, 400, 100, 100);
         D20.addActionListener((actionEvent -> {
             //System.out.println("D20 button pressed");
