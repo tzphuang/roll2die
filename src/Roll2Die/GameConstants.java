@@ -13,6 +13,9 @@ public class GameConstants {
     public static final int OVERWORLD_SCREEN_WIDTH = 1400;
     public static final int OVERWORLD_SCREEN_HEIGHT = 1000;
 
+    public static final int OVERWORLD_HUD_WIDTH = 1400;
+    public static final int OVERWORLD_HUD_HEIGHT = 200;
+
     public static final int GAME_SCREEN_WIDTH = 1400;
     public static final int GAME_SCREEN_HEIGHT = 1000;
 

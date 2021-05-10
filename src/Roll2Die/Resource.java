@@ -35,6 +35,8 @@ public class Resource {
             Resource.resources.put("tile7",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("tile 7.png"))));
             Resource.resources.put("tile8",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("tile 8.png"))));
 
+            Resource.resources.put("fireball",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("fireball.png"))));
+
 
         }catch (IOException e){
             e.printStackTrace();

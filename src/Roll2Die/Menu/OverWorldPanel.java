@@ -1,7 +1,10 @@
 package Roll2Die.Menu;
 
 import Roll2Die.Game.OverWorldTile;
+import Roll2Die.Game.PlayerCharacter;
 import Roll2Die.Game.PlayerTile;
+import Roll2Die.GameConstants;
+import Roll2Die.Huds.OverWorldPlayerHud;
 import Roll2Die.Launcher;
 import Roll2Die.Resource;
 
@@ -27,8 +30,10 @@ public class OverWorldPanel extends JPanel {
     private JButton twoD6;
 
     private PlayerTile playerTile;
+    private PlayerCharacter playerCharacter;
+    private OverWorldPlayerHud overWorldHud;
 
-    private ArrayList<OverWorldTile> overWorldTileMap; //2d array of all the overWorldTiles
+    private ArrayList<OverWorldTile> overWorldTileMap; //arraylist of all the overWorldTiles
 
     //this most definitely needs to have another parameter passed in
     //the player object so it can display the player's information
@@ -37,8 +42,9 @@ public class OverWorldPanel extends JPanel {
     {
         this.lf = lf;
 
-        overWorldBackground = Resource.getResourceImg("titleScreen");
-        this.setBackground(Color.BLACK);
+        //overWorldBackground = Resource.getResourceImg("titleScreen");
+        overWorldBackground = new BufferedImage(GameConstants.OVERWORLD_SCREEN_WIDTH,GameConstants.OVERWORLD_SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        this.setBackground(Color.RED);
         this.setLayout(null);
 
         addButtons();
@@ -71,7 +77,7 @@ public class OverWorldPanel extends JPanel {
             int numCols = Integer.parseInt(tileBitMap[0]);
             int numRows = Integer.parseInt(tileBitMap[1]);
             int offsetY = 200;
-            BufferedImage currentTileImage = new BufferedImage(0,0,BufferedImage.TYPE_INT_RGB);
+            BufferedImage currentTileImage = new BufferedImage(5,5,BufferedImage.TYPE_INT_RGB);
 
             for(int currRow = 0; currRow < numRows; currRow++){
 
@@ -135,29 +141,41 @@ public class OverWorldPanel extends JPanel {
         }
 
         playerTile = new PlayerTile(0, 900, 0, Resource.getResourceImg("overworld player img"), 1, 0);
+        playerCharacter = new PlayerCharacter(0, 0,0, 0, 0, Resource.getResourceImg("overworld player img"));
+        overWorldHud = new OverWorldPlayerHud(playerTile, playerCharacter);
     }
 
     private void addButtons(){
 
         //this is just to check if everything works
         //~~~ Start of check ~~~
-        monsterFightButton = new JButton(">>>Boss Fight");
+        monsterFightButton = new JButton("Fight Boss");
         monsterFightButton.setFont(new Font("Courier New", Font.BOLD ,24));
-        monsterFightButton.setBounds(0,0,250,50);
+        monsterFightButton.setBounds(1150,150,250,50);
         monsterFightButton.addActionListener((actionEvent -> {
             this.lf.setFrame("game");
         }));
-        this.add(monsterFightButton);
+
+        //this.add(monsterFightButton);
         //~~~ End of check ~~~
 
         //creating button for moving the Player 1 step
         movePlayer1Step = new JButton("Move 1 Step");
         movePlayer1Step.setFont(new Font("Courier New", Font.BOLD ,24));
-        movePlayer1Step.setBounds(1200, 900, 200, 100);
+        movePlayer1Step.setBounds(1200, 200, 200, 100);
         movePlayer1Step.addActionListener((actionEvent -> {
-            movePlayerNextStep();
-            this.playerTile.setMoveCounter(playerTile.getMoveCounter() - 1); //decrements moveCounter by 1
-            repaint();
+            //System.out.println("movePlayer1Step button pressed");
+            if(0 < playerTile.getMoveCounter()){
+                this.movePlayerNextStep();
+                this.playerTile.setMoveCounter(playerTile.getMoveCounter() - 1); //decrements moveCounter by 1
+                repaint();
+            }
+
+            //once the player is at the boss the button to fight the boss will be spawned in
+            if(61 == playerTile.getStepNum()){
+                this.add(monsterFightButton);
+            }
+
         }));
 
         //creating button for 20 sided dice rolling mechanic
@@ -165,7 +183,8 @@ public class OverWorldPanel extends JPanel {
         D20.setFont(new Font("Courier New", Font.BOLD ,24));
         D20.setBounds(1300, 400, 100, 100);
         D20.addActionListener((actionEvent -> {
-            buttonPresedD20();
+            //System.out.println("D20 button pressed");
+            this.buttonPressedD20();
             repaint();
         }));
 
@@ -174,7 +193,8 @@ public class OverWorldPanel extends JPanel {
         D4.setFont(new Font("Courier New", Font.BOLD ,24));
         D4.setBounds(1300, 500, 100, 100);
         D4.addActionListener((actionEvent -> {
-            buttonPresedD4();
+            //System.out.println("d4 button pressed");
+            this.buttonPressedD4();
             repaint();
         }));
 
@@ -183,9 +203,12 @@ public class OverWorldPanel extends JPanel {
         twoD6.setFont(new Font("Courier New", Font.BOLD ,24));
         twoD6.setBounds(1300, 600, 100, 100);
         twoD6.addActionListener((actionEvent -> {
-            buttonPressed2D6();
+            //System.out.println("twoD6 button pressed");
+            this.buttonPressed2D6();
             repaint();
         }));
+
+        this.add(movePlayer1Step);
 
         this.add(D20);
         this.add(D4);
@@ -193,8 +216,8 @@ public class OverWorldPanel extends JPanel {
     }
 
     private void movePlayerNextStep(){//moves player 1 step
-        int nextNumStep = playerTile.getStepNum() + 1;
-        setPlayerTileToStep(nextNumStep);
+        playerTile.setStepNum(playerTile.getStepNum() + 1);
+        setPlayerTileToStep(playerTile.getStepNum());
     }
 
     /* if the currentStep is not found in the array the player will not move
@@ -206,6 +229,7 @@ public class OverWorldPanel extends JPanel {
     private void setPlayerTileToStep(int currStep){
         for(int index = 0; index < this.overWorldTileMap.size(); index++){
             if(currStep == overWorldTileMap.get(index).getStepNum()){
+                //System.out.println("tile map found. X: " + overWorldTileMap.get(index).getX() + ", Y: "+overWorldTileMap.get(index).getY());
                 playerTile.setX(overWorldTileMap.get(index).getX());
                 playerTile.setY(overWorldTileMap.get(index).getY());
                 return;
@@ -213,24 +237,27 @@ public class OverWorldPanel extends JPanel {
         }
     }
 
-    private void buttonPresedD20(){
-        if(1 > playerTile.getStepNum()){ //when player has no more steps the dice will be rollable
+    private void buttonPressedD20(){
+        if(1 > playerTile.getMoveCounter()){ //when player has no more steps the dice will be rollable
             int results = (int)(Math.random() * 20) + 1; // roll d20, roll range [1-20]
+            //System.out.println("D20 pressed results is: " + results);
             playerTile.setMoveCounter(results);
         }
     }
 
-    private void buttonPresedD4(){
-        if(1 > playerTile.getStepNum()){ //when player has no more steps the dice will be rollable
+    private void buttonPressedD4(){
+        if(1 > playerTile.getMoveCounter()){ //when player has no more steps the dice will be rollable
             int results = (int)(Math.random() * 4) + 1; // roll d4, roll range [1-4]
+            //System.out.println("D4 pressed results is: " + results);
             playerTile.setMoveCounter(results);
         }
     }
 
     private void buttonPressed2D6(){
-        if(1 > playerTile.getStepNum()){ //when player has no more steps the dice will be rollable
+        if(1 > playerTile.getMoveCounter()){ //when player has no more steps the dice will be rollable
             int results = (int)(Math.random() * 6) + 1; // for first dice, roll range [1-6]
             results += (int)(Math.random() * 6) + 1; // for second dice, roll range [1-6]
+            //System.out.println("2D6 pressed results is: " + results);
             playerTile.setMoveCounter(results);
         }
     }
@@ -239,6 +266,9 @@ public class OverWorldPanel extends JPanel {
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(this.overWorldBackground,0,0,null);
+        this.overWorldTileMap.forEach(OverWorldTile -> OverWorldTile.drawImage(g2));
+        this.playerTile.drawImage(g2);
+        this.overWorldHud.drawImage(g2);
     }
 }
 

@@ -1,5 +1,7 @@
 package Roll2Die.Game;
 
+import Roll2Die.Resource;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -29,15 +31,51 @@ public class PlayerCharacter extends Moving{
 
     ArrayList<Moving> magicCastedArrayList; //we can have more than one casted magic
 
-    PlayerCharacter(int currX, int currY, int currVX, int currVY, float currAngle, BufferedImage currImg){
+    public PlayerCharacter(int currX, int currY, int currVX, int currVY, float currAngle, BufferedImage currImg){
         super(currX, currY, currVX, currVY, currAngle, currImg);
 
-        this.myPlayerStats = new playerStats("Tony", 100, 100, 25, 0, 0);
+        this.myPlayerStats = new playerStats("Player T", 100, 100, 25, 0, 0);
         this.myPlayerBuffs = new playerBuff(1,1,1,1,1,1);
         this.myPlayerDebuffs = new playerBuff(1, 1, 1, 1, 1,1);
         statsUpdate();
 
         this.magicCastedArrayList = new ArrayList<>();
+    }
+
+    public playerStats getMyPlayerStats() {
+        return myPlayerStats;
+    }
+
+    public playerBuff getMyPlayerBuffs() {
+        return myPlayerBuffs;
+    }
+
+    public playerBuff getMyPlayerDebuffs() {
+        return myPlayerDebuffs;
+    }
+
+    public int getCurrentSTR() {
+        return currentSTR;
+    }
+
+    public int getCurrentINT() {
+        return currentINT;
+    }
+
+    public int getCurrentDEX() {
+        return currentDEX;
+    }
+
+    public int getCurrentVIT() {
+        return currentVIT;
+    }
+
+    public int getCurrentWIS() {
+        return currentWIS;
+    }
+
+    public int getCurrentLUK() {
+        return currentLUK;
     }
 
     //update stats with formula (base stat + buff - debuff) for all stats
@@ -74,22 +112,20 @@ public class PlayerCharacter extends Moving{
 
     }
 
-    //add in fireball image
-    /*
+
     public void spawnMagic(){
         Projectile currProjectile;
 
         switch(magicNum){
             case 1:
-                currProjectile = new Fireball(this.getX(), this.getY(), 0, 0, this.getAngle(), FireBallImageGoesHere, this.currentINT);
+                currProjectile = new Fireball(this.getX(), this.getY(), 0, 0, this.getAngle(), Resource.getResourceImg("fireball"), this.currentINT);
                 break;
 
             default:
                 System.out.println("spawnMagic went to default, something is wrong!");
                 break;
         }
-    }*/
-
+    }
     @Override
     public void collisionDetected(GameObject currentObjectCollided) {
 
