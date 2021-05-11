@@ -14,6 +14,9 @@ public class GameConstants {
     public static final int OVERWORLD_SCREEN_HEIGHT = 1000;
 
     public static final int OVERWORLD_HUD_WIDTH = 1400;
+    public static final int OVERWORLD_HUD_PLAYER_MAIN_STATS_WIDTH = 300;
+    public static final int OVERWORLD_HUD_PLAYER_SKILL_STATS_WIDTH = 400;
+    public static final int OVERWORLD_HUD_PLAYER_TILE_INFO_WIDTH = 700;
     public static final int OVERWORLD_HUD_HEIGHT = 200;
 
     public static final int GAME_SCREEN_WIDTH = 1400;

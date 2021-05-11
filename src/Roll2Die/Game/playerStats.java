@@ -8,6 +8,8 @@ public class playerStats {
     private int gold;
     private int ATK; // this represents player "weapon" stat
     private int DEF; // this represents player "armor" stat
+    private int potHP; //how many hp pots the player has
+    private int potMP; //how many mp pots the player has
 
     //player's base stats they should never change
     private final int baseSTR = 10; // used to calculate ATK
@@ -18,13 +20,15 @@ public class playerStats {
     private final int baseLUK = 1; // used to determine how much extra gold you get after a battle
 
 
-    playerStats(String currName, int currHP, int currMP, int currGold, int currATK, int currDEF){
+    playerStats(String currName, int currHP, int currMP, int currGold, int currATK, int currDEF, int currPotHP, int currPotMP){
         this.name = currName;
         this.playerHP = currHP;
         this.playerMP = currMP;
         this.gold = currGold;
         this.ATK = currATK;
         this.DEF = currDEF;
+        this.potHP = currPotHP;
+        this.potMP = currPotMP;
     }
 
     public String getName() {
@@ -73,6 +77,22 @@ public class playerStats {
 
     public void setDEF(int DEF) {
         this.DEF = DEF;
+    }
+
+    public int getPotHP() {
+        return potHP;
+    }
+
+    public void setPotHP(int potHP) {
+        this.potHP = potHP;
+    }
+
+    public int getPotMP() {
+        return potMP;
+    }
+
+    public void setPotMP(int potMP) {
+        this.potMP = potMP;
     }
 
     public int getBaseSTR() {

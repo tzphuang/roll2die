@@ -236,6 +236,9 @@ public class OverWorldPanel extends JPanel {
                 //System.out.println("tile map found. X: " + overWorldTileMap.get(index).getX() + ", Y: "+overWorldTileMap.get(index).getY());
                 playerTile.setX(overWorldTileMap.get(index).getX());
                 playerTile.setY(overWorldTileMap.get(index).getY());
+
+                //setting hitbox to check collisions for overWorld things later
+                playerTile.getHitBox().setLocation(overWorldTileMap.get(index).getX(),overWorldTileMap.get(index).getY());
                 return;
             }
         }
