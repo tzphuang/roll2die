@@ -35,9 +35,16 @@ public class Resource {
             Resource.resources.put("tile7",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("tile 7.png"))));
             Resource.resources.put("tile8",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("tile 8.png"))));
 
+            //overWorld dice images
             Resource.resources.put("2d6",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("2d6 icon.png"))));
             Resource.resources.put("d4",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("d4 icon.png"))));
             Resource.resources.put("d20",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("d20 icon.png"))));
+
+            //overWorld activatable tile images
+            Resource.resources.put("buff",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("bufftile.png"))));
+            Resource.resources.put("debuff",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("debufftile.png"))));
+            Resource.resources.put("treasure",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("treasure img.png"))));
+            Resource.resources.put("trap",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("traptile.png"))));
 
             Resource.resources.put("fireball",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("fireball.png"))));
 
