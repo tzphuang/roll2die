@@ -1,8 +1,6 @@
 package Roll2Die.Menu;
 
-import Roll2Die.Game.OverWorldTile;
-import Roll2Die.Game.PlayerCharacter;
-import Roll2Die.Game.PlayerTile;
+import Roll2Die.Game.*;
 import Roll2Die.GameConstants;
 import Roll2Die.Huds.OverWorldPlayerHud;
 import Roll2Die.Launcher;
@@ -34,6 +32,7 @@ public class OverWorldPanel extends JPanel {
     private OverWorldPlayerHud overWorldHud;
 
     private ArrayList<OverWorldTile> overWorldTileMap; //arraylist of all the overWorldTiles
+    private ArrayList<interactiveTile> overWorldActiveTilesList;
 
     //this most definitely needs to have another parameter passed in
     //the player object so it can display the player's information
@@ -55,6 +54,7 @@ public class OverWorldPanel extends JPanel {
 
     private void initializeOverWorld(){
         overWorldTileMap = new ArrayList<>();
+        overWorldActiveTilesList = new ArrayList<>();
 
         try{
             InputStreamReader isr1 = new InputStreamReader(OverWorldPanel.class.getClassLoader().getResourceAsStream("tile background map.txt"));
@@ -78,6 +78,7 @@ public class OverWorldPanel extends JPanel {
             int numRows = Integer.parseInt(tileBitMap[1]);
             int offsetY = 200;
             BufferedImage currentTileImage = new BufferedImage(5,5,BufferedImage.TYPE_INT_RGB);
+            int rand;
 
             for(int currRow = 0; currRow < numRows; currRow++){
 
@@ -128,11 +129,49 @@ public class OverWorldPanel extends JPanel {
                             break;
 
                         default:
-                            System.out.println("OverWorldPanel > initializeOverWorld > switch default called");
+                            System.out.println("OverWorldPanel > initializeOverWorld > switch default called for overworld background maker");
                             break;
                     }
-                    OverWorldTile currentTile = new OverWorldTile(currCol*100, (currRow*100) + offsetY, 0, currentTileImage, Integer.parseInt(movementBitMap[currCol]));
+
+                    int movementNum = Integer.parseInt(movementBitMap[currCol]);
+
+                    OverWorldTile currentTile = new OverWorldTile(currCol*100, (currRow*100) + offsetY, 0, currentTileImage, movementNum);
                     overWorldTileMap.add(currentTile);
+
+                    // if the current tile's movement number is between [2-60]
+                    // add a random activatable tile to overWorldActiveTilesList at that x and y coordinate
+                    if(1 < movementNum && 61 > movementNum){
+                        rand = (int)(Math.random() * 4) + 1;
+
+                        switch(rand){
+
+                            case 1://adds a trap tile
+                                trapTile currTrapTile = new trapTile(currCol*100,(currRow*100) + offsetY, 0, Resource.getResourceImg("trap"), movementNum);
+                                this.overWorldActiveTilesList.add(currTrapTile);
+                                break;
+
+                            case 2://adds a treasure tile
+                                treasureTile currTreasureTile = new treasureTile(currCol*100,(currRow*100) + offsetY, 0, Resource.getResourceImg("treasure"), movementNum);
+                                this.overWorldActiveTilesList.add(currTreasureTile);
+                                break;
+
+                            case 3://adds a buff tile
+                                buffTile currBuffTile = new buffTile(currCol*100,(currRow*100) + offsetY, 0, Resource.getResourceImg("buff"), movementNum);
+                                this.overWorldActiveTilesList.add(currBuffTile);
+                                break;
+
+                            case 4://adds a debuff tile
+                                debuffTile currDebuffTile = new debuffTile(currCol*100,(currRow*100) + offsetY, 0, Resource.getResourceImg("debuff"), movementNum);
+                                this.overWorldActiveTilesList.add(currDebuffTile);
+                                break;
+
+                            default:
+                                System.out.println("OverWorldPanel > initializeOverWorld > switch default called for overworld activatable tile maker");
+                                break;
+                        }
+
+                    }
+
                 }
             }
         }catch (IOException ex) {
@@ -169,6 +208,10 @@ public class OverWorldPanel extends JPanel {
                 this.movePlayerNextStep();
                 this.playerTile.setMoveCounter(playerTile.getMoveCounter() - 1); //decrements moveCounter by 1
                 repaint();
+
+                if(0 == playerTile.getMoveCounter()){
+                    overWorldCollisionChecker();
+                }
             }
 
             //once the player is at the boss the button to fight the boss will be spawned in
@@ -238,7 +281,7 @@ public class OverWorldPanel extends JPanel {
                 playerTile.setY(overWorldTileMap.get(index).getY());
 
                 //setting hitbox to check collisions for overWorld things later
-                playerTile.getHitBox().setLocation(overWorldTileMap.get(index).getX(),overWorldTileMap.get(index).getY());
+                playerTile.setHitBox(overWorldTileMap.get(index).getX(),overWorldTileMap.get(index).getY());
                 return;
             }
         }
@@ -274,8 +317,33 @@ public class OverWorldPanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(this.overWorldBackground,0,0,null);
         this.overWorldTileMap.forEach(OverWorldTile -> OverWorldTile.drawImage(g2));
+        this.overWorldActiveTilesList.forEach(interactiveTile -> interactiveTile.drawImage(g2));
         this.playerTile.drawImage(g2);
         this.overWorldHud.drawImage(g2);
+    }
+
+    //should only called when the playerTile has 0 movements left
+    //this is called in move 1 step forward method
+    private void overWorldCollisionChecker(){
+
+        for(int index = 0; index < overWorldActiveTilesList.size(); index++){
+            //checks through the active tiles and sees if the over world player tile is
+            if(playerTile.getHitBox().intersects( overWorldActiveTilesList.get(index).getHitBox() )){
+
+                // although the over world player tile's hit box is being checked
+                // the actual random interaction are applied to the playerCharacter
+                overWorldActiveTilesList.get(index).applyTileRandomInteraction(playerCharacter);
+
+                //after tile is applied delete it
+                overWorldActiveTilesList.remove(index);
+
+                //index subtracted to account for the removal of the activated tile
+                index--;
+                playerCharacter.statsUpdate();
+                repaint();
+            }
+        }
+
     }
 }
 
