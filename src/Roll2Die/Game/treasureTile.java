@@ -19,6 +19,10 @@ public class treasureTile extends interactiveTile{
         switch( getRandomNum() ){
             case 1:
                 int extraGold = (int)(Math.random() * 2000) + 1; // [1-2000] range
+
+                // if player luck is 25, gold rewarded will be multiplied by 1.25
+                // and then added to current player's gold total
+                extraGold = (int ) (extraGold * (1 + (currPlayerChar.getCurrentLUK()/100)));
                 currPlayerChar.getMyPlayerStats().setGold(currPlayerChar.getMyPlayerStats().getGold() + extraGold);
                 break;
 

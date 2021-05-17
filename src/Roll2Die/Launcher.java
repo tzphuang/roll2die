@@ -70,9 +70,14 @@ public class Launcher {
 
         this.startPanel = new StartMenuPanel(this); // create a new start panel
         this.controlPanel = new PlayerControlsPanel(this);
-        this.worldPanel = new OverWorldPanel(this);
         this.gamePanel = new MonsterFightEnvironment(this); // create a new game panel
-        this.gamePanel.fightInit(); // initialize game, but DO NOT start game
+
+        // overWorld panel creation must come after gamePanel creation
+        // because OverWorldPanel creates the playerCharacter and passes it into gamePanel
+        // and if you switch the order you get a null pointer exception
+        // because the gamepanel is not yet created so you cant set any of its components yet
+        this.worldPanel = new OverWorldPanel(this);
+
         this.endPanel = new EndGamePanel(this); // create a new end game pane;
         this.winPanel = new WinnerPanel(this);
         this.creditPanel = new CreditPanel(this);
@@ -134,6 +139,9 @@ public class Launcher {
         this.jf.setVisible(true); // show the JFrame
     }
 
+    public MonsterFightEnvironment getGamePanel() {
+        return gamePanel;
+    }
 
     public JFrame getJf() {
         return jf;

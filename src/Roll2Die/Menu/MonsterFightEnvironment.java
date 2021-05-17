@@ -1,5 +1,7 @@
 package Roll2Die.Menu;
 
+import Roll2Die.Game.PlayerCharacter;
+import Roll2Die.Game.fightable;
 import Roll2Die.Launcher;
 import Roll2Die.Resource;
 
@@ -18,6 +20,16 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
     private Launcher lf;
     private ArrayList<Rectangle> mouseHitBoxes; //used to store all mouse hitboxes
     private ArrayList<Rectangle> bossHitBoxes;
+    private fightable monster;
+    private PlayerCharacter player;
+
+    public void setCurrMonsterToFight(fightable currentMonster){
+        this.monster = currentMonster;
+    }
+
+    public void setCurrPlayerCharacter(PlayerCharacter currPlayer){
+        this.player = currPlayer;
+    }
 
     public MonsterFightEnvironment(Launcher lf){
         this.lf = lf;
@@ -51,12 +63,17 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
 
     }
 
+    // fightInit should take in the hitboxes array from the current monster
+    // and have it stored? cant i just have the collider methods take in the actual hitboxes
+    // i guess i wrote it this way because i didnt know what to call my classes
+    // so this was just me coding ahead of time to get my thoughts out
     public void fightInit(){
+
         //his should be filled by mouse click + mouse drag + mouse release
-        mouseHitBoxes = new ArrayList<>();
+        //mouseHitBoxes = new ArrayList<>();
 
         //this should be filled by the boss object
-        bossHitBoxes = new ArrayList<>();
+        //bossHitBoxes = new ArrayList<>();
     }
 
 
@@ -77,7 +94,7 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
             //to how many hitboxes the mouse click intersected multiplied number of boss
             for(int indexBossArray = 0; indexBossArray < bossHitBoxes.size(); indexBossArray++){
                 if(mouseHitBoxes.get(indexMouseArray).intersects(bossHitBoxes.get(indexBossArray))){
-                    //apply damage to boss
+                    //apply damage to boss for EVERY hitbox collided with on current mouse drag
                 }
             }
 

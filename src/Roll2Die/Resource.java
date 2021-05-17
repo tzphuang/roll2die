@@ -45,6 +45,8 @@ public class Resource {
             Resource.resources.put("debuff",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("debufftile.png"))));
             Resource.resources.put("treasure",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("treasure img.png"))));
             Resource.resources.put("trap",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("traptile.png"))));
+            Resource.resources.put("monster",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("monster panel.png"))));
+
 
             Resource.resources.put("fireball",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("fireball.png"))));
 

@@ -31,8 +31,11 @@ public class OverWorldPanel extends JPanel {
     private PlayerCharacter playerCharacter;
     private OverWorldPlayerHud overWorldHud;
 
-    private ArrayList<OverWorldTile> overWorldTileMap; //arraylist of all the overWorldTiles
-    private ArrayList<interactiveTile> overWorldActiveTilesList;
+    //arraylist of all the overWorldTiles to draw for background
+    private ArrayList<OverWorldTile> overWorldTileMap;
+
+    //arraylist of all tiles on overWorld that can collide with the player tile
+    private ArrayList<OverWorldTile> overWorldActiveTilesList;
 
     //this most definitely needs to have another parameter passed in
     //the player object so it can display the player's information
@@ -50,6 +53,8 @@ public class OverWorldPanel extends JPanel {
 
         initializeOverWorld();
 
+        //passes into the gamePanel/MonsterFightEnvironment the player character
+        this.lf.getGamePanel().setCurrPlayerCharacter(this.playerCharacter);
     }
 
     private void initializeOverWorld(){
@@ -141,7 +146,7 @@ public class OverWorldPanel extends JPanel {
                     // if the current tile's movement number is between [2-60]
                     // add a random activatable tile to overWorldActiveTilesList at that x and y coordinate
                     if(1 < movementNum && 61 > movementNum){
-                        rand = (int)(Math.random() * 4) + 1;
+                        rand = (int)(Math.random() * 5) + 1;
 
                         switch(rand){
 
@@ -163,6 +168,11 @@ public class OverWorldPanel extends JPanel {
                             case 4://adds a debuff tile
                                 debuffTile currDebuffTile = new debuffTile(currCol*100,(currRow*100) + offsetY, 0, Resource.getResourceImg("debuff"), movementNum);
                                 this.overWorldActiveTilesList.add(currDebuffTile);
+                                break;
+
+                            case 5://adds a regularMobTile
+                                regularMobTile currMobTile = new regularMobTile(currCol*100,(currRow*100) + offsetY, 0, Resource.getResourceImg("monster"), movementNum);
+                                this.overWorldActiveTilesList.add(currMobTile);
                                 break;
 
                             default:
@@ -327,21 +337,57 @@ public class OverWorldPanel extends JPanel {
     private void overWorldCollisionChecker(){
 
         for(int index = 0; index < overWorldActiveTilesList.size(); index++){
-            //checks through the active tiles and sees if the over world player tile is
-            if(playerTile.getHitBox().intersects( overWorldActiveTilesList.get(index).getHitBox() )){
 
-                // although the over world player tile's hit box is being checked
-                // the actual random interaction are applied to the playerCharacter
-                overWorldActiveTilesList.get(index).applyTileRandomInteraction(playerCharacter);
 
-                //after tile is applied delete it
-                overWorldActiveTilesList.remove(index);
+            // checks the overWorld panel if its currently an instance of an interactive tile
+            // since interactive tiles behave differently than fightable tiles in that they
+            // do no put the user into the MonsterFightEnvironment it makes sense to have different checks
+            // for the instance of its class to apply different methods for those classes
+            // in this case insteractiveTile will call "applyTileRandomInteraction" when collided with
+            if(overWorldActiveTilesList.get(index) instanceof interactiveTile){
+                //checks through the active tiles and sees if the over world player tile is on it
+                if(playerTile.getHitBox().intersects( overWorldActiveTilesList.get(index).getHitBox() )){
 
-                //index subtracted to account for the removal of the activated tile
-                index--;
-                playerCharacter.statsUpdate();
-                repaint();
+                    // although the over world player tile's hit box is being checked
+                    // the actual random interaction are applied to the playerCharacter
+                    ((interactiveTile) overWorldActiveTilesList.get(index)).applyTileRandomInteraction(playerCharacter);
+
+                    //after tile is applied delete it
+                    overWorldActiveTilesList.remove(index);
+
+                    //index subtracted to account for the removal of the activated tile
+                    index--;
+                    playerCharacter.statsUpdate();
+                    repaint();
+                }
             }
+
+            // checks the overWorld panel to see if its an instance of a fightableTile
+            // since fightableTiles do different things and take in different resources for execution
+            // when its activated, it makes sense to have a separate check for this type of tile
+            // in this case fightableTile will call "initiateMonsterFightEnvironment" when collided with
+            else if(overWorldActiveTilesList.get(index) instanceof fightableTile){
+                //checks through the active tiles and sees if the over world player tile is on it
+                if(playerTile.getHitBox().intersects( overWorldActiveTilesList.get(index).getHitBox() )){
+
+                    //
+                    ((fightableTile) overWorldActiveTilesList.get(index)).initiateMonsterFightEnvironment(lf);
+
+                    //after tile is applied delete it
+                    overWorldActiveTilesList.remove(index);
+
+                    //index subtracted to account for the removal of the activated tile
+                    index--;
+                    playerCharacter.statsUpdate();
+                    repaint();
+                }
+            }
+
+            else{
+                System.out.println("[PROBLEM] - OverWorldpanel > overWorldCollisionChecker > else statement activated");
+            }
+
+
         }
 
     }
