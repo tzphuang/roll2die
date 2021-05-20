@@ -47,7 +47,14 @@ public class Resource {
             Resource.resources.put("trap",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("traptile.png"))));
             Resource.resources.put("monster",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("monster panel.png"))));
 
+            Resource.resources.put("blueSlime",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("blue slime.png"))));
+            Resource.resources.put("blueSlimeFallingAtkImg",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("slime attack redone.png"))));
 
+            Resource.resources.put("fightBackground",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("background plane.png"))));
+            Resource.resources.put("hpPot",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("hpPotImg.png"))));
+            Resource.resources.put("mpPot",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("mpPotImg.png"))));
+
+            Resource.resources.put("playerCharacter",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("playerChar.png"))));
             Resource.resources.put("fireball",read(Objects.requireNonNull(Launcher.class.getClassLoader().getResource("fireball.png"))));
 
 

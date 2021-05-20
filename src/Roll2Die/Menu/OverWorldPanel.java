@@ -190,7 +190,7 @@ public class OverWorldPanel extends JPanel {
         }
 
         playerTile = new PlayerTile(0, 900, 0, Resource.getResourceImg("overworld player img"), 1, 0);
-        playerCharacter = new PlayerCharacter(0, 0,0, 0, 0, Resource.getResourceImg("overworld player img"));
+        playerCharacter = new PlayerCharacter(GameConstants.PLAYER_FIGHT_TILE_MIDDLE_X, GameConstants.PLAYER_FIGHT_TILE_MIDDLE_Y,0, 0, 0, Resource.getResourceImg("playerCharacter"));
         overWorldHud = new OverWorldPlayerHud(playerTile, playerCharacter);
     }
 
@@ -213,7 +213,6 @@ public class OverWorldPanel extends JPanel {
         movePlayer1Step.setFont(new Font("Courier New", Font.BOLD ,24));
         movePlayer1Step.setBounds(1200, 200, 200, 100);
         movePlayer1Step.addActionListener((actionEvent -> {
-            //System.out.println("movePlayer1Step button pressed");
             if(0 < playerTile.getMoveCounter()){
                 this.movePlayerNextStep();
                 this.playerTile.setMoveCounter(playerTile.getMoveCounter() - 1); //decrements moveCounter by 1
@@ -264,6 +263,9 @@ public class OverWorldPanel extends JPanel {
             this.buttonPressed2D6();
             repaint();
         }));
+
+        //only here for testing delete after
+        this.add(monsterFightButton);
 
         this.add(movePlayer1Step);
 

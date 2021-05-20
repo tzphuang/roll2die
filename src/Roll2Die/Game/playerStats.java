@@ -1,5 +1,7 @@
 package Roll2Die.Game;
 
+import Roll2Die.GameConstants;
+
 public class playerStats {
     //player's general stats
     private String name;
@@ -10,6 +12,9 @@ public class playerStats {
     private int DEF; // this represents player "armor" stat
     private int potHP; //how many hp pots the player has
     private int potMP; //how many mp pots the player has
+
+    private int MaxPlayerHp;
+    private int MaxPlayerMp;
 
     //player's base stats they should never change
     private final int baseSTR = 10; // used to calculate ATK
@@ -29,6 +34,8 @@ public class playerStats {
         this.DEF = currDEF;
         this.potHP = currPotHP;
         this.potMP = currPotMP;
+        this.MaxPlayerHp = GameConstants.PLAYER_MAX_HP_VALUE;
+        this.MaxPlayerMp = GameConstants.PLAYER_MAX_MP_VALUE;
     }
 
     public String getName() {
@@ -77,6 +84,22 @@ public class playerStats {
 
     public void setDEF(int DEF) {
         this.DEF = DEF;
+    }
+
+    public int getMaxPlayerHp() {
+        return MaxPlayerHp;
+    }
+
+    public void setMaxPlayerHp(int maxPlayerHp) {
+        MaxPlayerHp = maxPlayerHp;
+    }
+
+    public int getMaxPlayerMp() {
+        return MaxPlayerMp;
+    }
+
+    public void setMaxPlayerMp(int maxPlayerMp) {
+        MaxPlayerMp = maxPlayerMp;
     }
 
     public int getPotHP() {
