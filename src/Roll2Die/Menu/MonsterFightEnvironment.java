@@ -49,11 +49,6 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
         this.setLayout(null);
 
         addButtons();
-
-        //initializing blue slime here for testing purposes
-        //monster should always be initialized through the OverWorldPanel
-        monster = new blueSlime(GameConstants.MONSTER_COORDINATE_X,GameConstants.MONSTER_COORDINATE_Y,0, Resource.getResourceImg("blueSlime"));
-        fightHud = new MonsterFightEnvironmentHud(this.player, monster);
     }
 
     private void addButtons(){
@@ -159,6 +154,11 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
 
         //this should be filled by the boss object
         //bossHitBoxes = new ArrayList<>();
+
+        //initializing blue slime here for testing purposes
+        //monster should always be initialized through the OverWorldPanel
+        monster = new blueSlime(GameConstants.MONSTER_COORDINATE_X,GameConstants.MONSTER_COORDINATE_Y,0, Resource.getResourceImg("blueSlime"));
+        fightHud = new MonsterFightEnvironmentHud(this.player, monster);
     }
 
 

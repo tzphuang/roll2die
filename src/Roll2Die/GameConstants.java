@@ -37,22 +37,24 @@ public class GameConstants {
     public static final int START_FIGHT_BUTTON_X = 600;
     public static final int START_FIGHT_BUTTON_Y = 500;
 
-    public static final int MONSTER_HP_BAR_X = 300;
-    public static final int MONSTER_HP_BAR_Y = 50;
+    public static final int MONSTER_HUD_HP_BAR_X = 200;
+    public static final int MONSTER_HUD_HP_BAR_Y = 0;
+    public static final int MONSTER_HUD_HP_BAR_LENGTH = 1000;
+    public static final int MONSTER_HUD_HP_BAR_HEIGHT = 100;
     public static final int MONSTER_HP_BAR_LENGTH = 800;
-    public static final int MONSTER_HP_BAR_HEIGHT = 50;
+    public static final int MONSTER_HP_BAR_HEIGHT = 35;
 
     public static final int PLAYER_HP_BAR_X = 300;
     public static final int PLAYER_HP_BAR_Y = 800;
     public static final int PLAYER_HP_BAR_LENGTH = 800;
-    public static final int PLAYER_HP_BAR_HEIGHT = 45;
+    public static final int PLAYER_HP_BAR_HEIGHT = 35;
 
     public static final int PLAYER_MP_BAR_X = 300;
     public static final int PLAYER_MP_BAR_Y = 850;
     public static final int PLAYER_MP_BAR_LENGTH = 800;
-    public static final int PLAYER_MP_BAR_HEIGHT = 45;
+    public static final int PLAYER_MP_BAR_HEIGHT = 35;
 
-    public static final int PLAYER_POTS_NUMBER_HUD_X = 1100;
+    public static final int PLAYER_POTS_NUMBER_HUD_X = 1000;
     public static final int PLAYER_POTS_NUMBER_HUD_Y  = 400;
 
     public static final int MONSTER_COORDINATE_X = 600;

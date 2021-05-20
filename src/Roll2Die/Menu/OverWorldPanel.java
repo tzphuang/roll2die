@@ -54,7 +54,7 @@ public class OverWorldPanel extends JPanel {
         initializeOverWorld();
 
         //passes into the gamePanel/MonsterFightEnvironment the player character
-        this.lf.getGamePanel().setCurrPlayerCharacter(this.playerCharacter);
+        //this.lf.getGamePanel().setCurrPlayerCharacter(this.playerCharacter);
     }
 
     private void initializeOverWorld(){
@@ -191,6 +191,11 @@ public class OverWorldPanel extends JPanel {
 
         playerTile = new PlayerTile(0, 900, 0, Resource.getResourceImg("overworld player img"), 1, 0);
         playerCharacter = new PlayerCharacter(GameConstants.PLAYER_FIGHT_TILE_MIDDLE_X, GameConstants.PLAYER_FIGHT_TILE_MIDDLE_Y,0, 0, 0, Resource.getResourceImg("playerCharacter"));
+
+        //passes into the gamePanel/MonsterFightEnvironment the player character
+        this.lf.getGamePanel().setCurrPlayerCharacter(this.playerCharacter);
+        this.lf.getGamePanel().fightInit();
+
         overWorldHud = new OverWorldPlayerHud(playerTile, playerCharacter);
     }
 
