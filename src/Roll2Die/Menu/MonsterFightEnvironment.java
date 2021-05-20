@@ -19,7 +19,7 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
     private JButton winnerButton;
     private Launcher lf;
     private ArrayList<Rectangle> mouseHitBoxes; //used to store all mouse hitboxes
-    private ArrayList<Rectangle> bossHitBoxes;
+    private ArrayList<Rectangle> bossHitBoxes; //might not be used?
     private fightable monster;
     private PlayerCharacter player;
 
