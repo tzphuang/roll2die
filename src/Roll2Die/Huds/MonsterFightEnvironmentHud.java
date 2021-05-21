@@ -51,7 +51,7 @@ public class MonsterFightEnvironmentHud extends GameHuds{
 
         g2dplayerHud.setColor(Color.CYAN); //setting color for hp bar color
         pixelPerHp = GameConstants.PLAYER_MP_BAR_LENGTH / playerCharacter.getMyPlayerStats().getMaxPlayerMp();
-        int playerManaBarLength = (int) (pixelPerHp * playerCharacter.getMyPlayerStats().getPlayerHP());
+        int playerManaBarLength = (int) (pixelPerHp * playerCharacter.getMyPlayerStats().getPlayerMP());
         g2dplayerHud.fillRect(100, 50, playerManaBarLength, GameConstants.PLAYER_MP_BAR_HEIGHT);
 
         g2dplayerHud.setColor(Color.YELLOW); //setting color for text

@@ -34,7 +34,7 @@ public class PlayerCharacter extends Moving{
     public PlayerCharacter(int currX, int currY, int currVX, int currVY, float currAngle, BufferedImage currImg){
         super(currX, currY, currVX, currVY, currAngle, currImg);
 
-        this.myPlayerStats = new playerStats("Player T", 100, 100, 25, 0, 0, 0,0);
+        this.myPlayerStats = new playerStats("Player T", 100, 100, 25, 0, 0, 1,1);
         this.myPlayerBuffs = new playerBuff(10,9,8,7,6,5);
         this.myPlayerDebuffs = new playerBuff(9, 8, 7, 6, 5,4);
         statsUpdate();
