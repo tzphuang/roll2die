@@ -173,6 +173,11 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
+
+        //sets background to black manually
+        g2.setColor(Color.black);
+        g2.fillRect(0,0,GameConstants.GAME_SCREEN_WIDTH, GameConstants.GAME_SCREEN_HEIGHT);
+
         g2.drawImage(this.gameBackground,0,0,null);
 
         g2.setFont(new Font("Helvetica", Font.BOLD, 16));
