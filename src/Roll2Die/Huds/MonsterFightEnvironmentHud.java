@@ -47,7 +47,7 @@ public class MonsterFightEnvironmentHud extends GameHuds{
         g2dplayerHud.setColor(Color.GREEN); //setting color for hp bar color
         double pixelPerHp = GameConstants.PLAYER_HP_BAR_LENGTH / playerCharacter.getMyPlayerStats().getMaxPlayerHp();
         int playerHealthBarLength = (int) (pixelPerHp * playerCharacter.getMyPlayerStats().getPlayerHP());
-        g2dplayerHud.fillRect(100, 0, playerHealthBarLength, GameConstants.PLAYER_HP_BAR_HEIGHT);
+        g2dplayerHud.fillRect(100, 10, playerHealthBarLength, GameConstants.PLAYER_HP_BAR_HEIGHT);
 
         g2dplayerHud.setColor(Color.CYAN); //setting color for hp bar color
         pixelPerHp = GameConstants.PLAYER_MP_BAR_LENGTH / playerCharacter.getMyPlayerStats().getMaxPlayerMp();
@@ -58,7 +58,7 @@ public class MonsterFightEnvironmentHud extends GameHuds{
         String currDrawString;
 
         currDrawString = "HP: " + playerCharacter.getMyPlayerStats().getPlayerHP();
-        g2dplayerHud.drawString(currDrawString,0, 25);
+        g2dplayerHud.drawString(currDrawString,0, 35);
 
         currDrawString = "MP: " + playerCharacter.getMyPlayerStats().getPlayerMP();
         g2dplayerHud.drawString(currDrawString, 0, 75);
