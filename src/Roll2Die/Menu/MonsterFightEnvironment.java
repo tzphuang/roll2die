@@ -33,6 +33,8 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
     private PlayerCharacter player; //initialized in overWorldPanel
     private MonsterFightEnvironmentHud fightHud;
 
+    private long tickCounter = 0;
+
     public void setCurrMonsterToFight(fightable currentMonster){
         this.monster = currentMonster;
     }
@@ -139,8 +141,10 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
         repaint();
     }
 
+    // this should be the main run function for the game where it updates
+    // and calls functions accordingly
     public void run(){
-
+        //System.out.println("run called tickTimer is: " + tickCounter);
     }
 
     // fightInit should take in the hitboxes array from the current monster
@@ -159,6 +163,10 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
         //monster should always be initialized through the OverWorldPanel
         monster = new blueSlime(GameConstants.MONSTER_COORDINATE_X,GameConstants.MONSTER_COORDINATE_Y,0, Resource.getResourceImg("blueSlime"));
         fightHud = new MonsterFightEnvironmentHud(this.player, monster);
+
+        //i am trying to paint the background black on initial start up but its not working
+        //System.out.println("repaint gets called in fightInit");
+        //repaint();
     }
 
 
@@ -166,6 +174,11 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(this.gameBackground,0,0,null);
+
+        g2.setFont(new Font("Helvetica", Font.BOLD, 16));
+        g2.setColor(Color.yellow);
+        String currDrawString = "Tick Counter: " + tickCounter;
+        g2.drawString(currDrawString, 1200, 20);
 
         this.fightHud.drawImage(g2);
         this.player.drawImage(g2);

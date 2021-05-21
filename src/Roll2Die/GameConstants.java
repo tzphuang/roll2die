@@ -44,13 +44,14 @@ public class GameConstants {
     public static final int MONSTER_HP_BAR_LENGTH = 800;
     public static final int MONSTER_HP_BAR_HEIGHT = 35;
 
-    public static final int PLAYER_HP_BAR_X = 300;
-    public static final int PLAYER_HP_BAR_Y = 800;
+    public static final int PLAYER_HUD_HP_BAR_X = 200;
+    public static final int PLAYER_HUD_HP_BAR_Y = 800;
+    public static final int PLAYER_HUD_HP_BAR_LENGTH = 1000;
+    public static final int PLAYER_HUD_HP_BAR_HEIGHT = 100;
+
     public static final int PLAYER_HP_BAR_LENGTH = 800;
     public static final int PLAYER_HP_BAR_HEIGHT = 35;
 
-    public static final int PLAYER_MP_BAR_X = 300;
-    public static final int PLAYER_MP_BAR_Y = 850;
     public static final int PLAYER_MP_BAR_LENGTH = 800;
     public static final int PLAYER_MP_BAR_HEIGHT = 35;
 

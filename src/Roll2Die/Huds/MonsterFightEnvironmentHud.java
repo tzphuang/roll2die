@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MonsterFightEnvironmentHud extends GameHuds{
-
+    public static int drawImageCounter = 0;
     private PlayerCharacter playerCharacter;
     private fightable monster;
     private int fontSize = 40;
@@ -39,29 +39,31 @@ public class MonsterFightEnvironmentHud extends GameHuds{
     }
 
     private void drawPlayerHealthBar(Graphics gameImage){
-        BufferedImage playerHud = new BufferedImage(GameConstants.GAME_SCREEN_WIDTH, GameConstants.GAME_SCREEN_HEIGHT,BufferedImage.TYPE_INT_RGB);
+
+        BufferedImage playerHud = new BufferedImage(GameConstants.PLAYER_HUD_HP_BAR_LENGTH, GameConstants.PLAYER_HUD_HP_BAR_HEIGHT,BufferedImage.TYPE_INT_RGB);
         Graphics2D g2dplayerHud = playerHud.createGraphics();
-        g2dplayerHud.setFont(new Font("Helvetica", Font.BOLD, this.fontSize));
+        g2dplayerHud.setFont(new Font("Helvetica", Font.BOLD, 25));
 
         g2dplayerHud.setColor(Color.GREEN); //setting color for hp bar color
         double pixelPerHp = GameConstants.PLAYER_HP_BAR_LENGTH / playerCharacter.getMyPlayerStats().getMaxPlayerHp();
         int playerHealthBarLength = (int) (pixelPerHp * playerCharacter.getMyPlayerStats().getPlayerHP());
-        g2dplayerHud.fillRect(GameConstants.PLAYER_HP_BAR_X, GameConstants.PLAYER_HP_BAR_Y, playerHealthBarLength, GameConstants.PLAYER_HP_BAR_HEIGHT);
+        g2dplayerHud.fillRect(100, 0, playerHealthBarLength, GameConstants.PLAYER_HP_BAR_HEIGHT);
 
         g2dplayerHud.setColor(Color.CYAN); //setting color for hp bar color
         pixelPerHp = GameConstants.PLAYER_MP_BAR_LENGTH / playerCharacter.getMyPlayerStats().getMaxPlayerMp();
         int playerManaBarLength = (int) (pixelPerHp * playerCharacter.getMyPlayerStats().getPlayerHP());
-        g2dplayerHud.fillRect(GameConstants.PLAYER_MP_BAR_X, GameConstants.PLAYER_MP_BAR_Y, playerManaBarLength, GameConstants.PLAYER_MP_BAR_HEIGHT);
+        g2dplayerHud.fillRect(100, 50, playerManaBarLength, GameConstants.PLAYER_MP_BAR_HEIGHT);
 
         g2dplayerHud.setColor(Color.YELLOW); //setting color for text
         String currDrawString;
+
         currDrawString = "HP: " + playerCharacter.getMyPlayerStats().getPlayerHP();
-        g2dplayerHud.drawString(currDrawString, 250, 850);
+        g2dplayerHud.drawString(currDrawString,0, 25);
 
         currDrawString = "MP: " + playerCharacter.getMyPlayerStats().getPlayerMP();
-        g2dplayerHud.drawString(currDrawString, 250, 900);
+        g2dplayerHud.drawString(currDrawString, 0, 75);
 
-        gameImage.drawImage(playerHud, 0, 0, null);
+        gameImage.drawImage(playerHud, GameConstants.PLAYER_HUD_HP_BAR_X, GameConstants.PLAYER_HUD_HP_BAR_Y, null);
     }
 
     private void drawPlayerPotsNumbers(Graphics gameImage){
@@ -82,11 +84,10 @@ public class MonsterFightEnvironmentHud extends GameHuds{
 
     @Override
     public void drawImage(Graphics gameImage) {
+        //System.out.println("Drawimage iteration: " + drawImageCounter++);
+
         drawMonsterHealthBar(gameImage);
-
-        //fix this please
-        //drawPlayerHealthBar(gameImage);
-
+        drawPlayerHealthBar(gameImage);
         drawPlayerPotsNumbers(gameImage);
     }
 }
