@@ -220,6 +220,7 @@ public class MonsterFightEnvironment extends JPanel implements Runnable {
 
         //loop through boss hitboxes and compare them to the player
         /*
+        *
         * example player was hit at timer 1000
         * since player was hit the player should not be hit for 144 game ticks (1 second)
         * so at 1144 timer the player should be able to be hit again
